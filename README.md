@@ -1,4 +1,6 @@
-# Keras to TensorFlow
+# Keras to TensorFlow to tfLite
+This part is created by [Amir Abdi](https://github.com/amir-abdi/keras_to_tensorflow). I added my part for converting to tflite from the binary protobuf.
+
 The **keras_to_tensorflow** is a tool that converts a trained keras model into a ready-for-inference TensorFlow model. *The tool is NOT tailored for TensorFlow 2.0 it SEEMS to be working fine.*
 
 #### Summary
@@ -10,7 +12,7 @@ The **keras_to_tensorflow** is a tool that converts a trained keras model into a
 which can later be used in the `tf.train.Saver` class to continue training.   
 
 
-## How to use
+## How to use Keras to Binary Graph
 Keras models can be saved as a single [`.hdf5` or `h5`] file, which stores both the architecture and weights, using the `model.save()` function.
  This model can be then converted to a TensorFlow model by calling this tool as follows:
     
@@ -27,9 +29,18 @@ In this case, the model can be converted as follows:
         --output_model="path/to/save/model.pb"
 
 Try 
-
     python keras_to_tensorflow.py --help
 to learn about other supported flags (quantize, output_nodes_prefix, save_graph_def).
+
+## How to use PB to tfLite
+As Keras to tfLite failed quite times we suggested this step in the pipeline. While you use the previous transformer we suggest to take note of input layer name, output and also inputs shapes (sizes in the case of images)
+    
+    python pb_graph_tflite.py 
+        --input_model="models/wpod-net_update1.pb" 
+        --input_arrays="input"
+        --output_arrays="concatenate_1/concat"
+        --output_model="models/tflite_converted"
+        --input_shape="1,240,80,3"
 
 
 ## Dependencies

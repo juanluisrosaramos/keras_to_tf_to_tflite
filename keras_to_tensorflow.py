@@ -126,6 +126,11 @@ def main(args):
         K.set_image_data_format('channels_last')
 
     model = load_model(FLAGS.input_model, FLAGS.input_model_json, FLAGS.input_model_yaml)
+    # # convert model
+    # converter = tf.lite.TFLiteConverter.from_keras_model_file( model)
+    # converter.allow_custom_ops=True
+    # tfmodel = converter.convert()
+    # open ("plano_tensor_colab.tflite" , "wb") .write(tfmodel)
 
     # TODO(amirabdi): Support networks with multiple inputs
     orig_output_node_names = [node.op.name for node in model.outputs]

@@ -7,4 +7,5 @@
 *.yml
 *.ckpt
 .idea
+models/
 
